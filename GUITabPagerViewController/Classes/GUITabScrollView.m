@@ -60,7 +60,14 @@
     [contentView setBackgroundColor:backgroundColor];
     [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:contentView];
-    
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:contentView
+                                                     attribute:NSLayoutAttributeTop
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeTop
+                                                    multiplier:1.0
+                                                      constant:0.0]];
+
     NSMutableString *VFL = [NSMutableString stringWithString:@"H:|"];
     NSMutableDictionary *views = [NSMutableDictionary dictionary];
     int index = 0;
