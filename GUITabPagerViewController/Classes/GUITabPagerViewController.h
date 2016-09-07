@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GUITabScrollView.h"
 
 @protocol GUITabPagerDataSource;
 @protocol GUITabPagerDelegate;
@@ -15,6 +16,8 @@
 
 @property (weak, nonatomic) id<GUITabPagerDataSource> dataSource;
 @property (weak, nonatomic) id<GUITabPagerDelegate> delegate;
+
+@property (strong, nonatomic) GUITabScrollView *header;
 
 - (void)reloadData;
 - (NSInteger)selectedIndex;
