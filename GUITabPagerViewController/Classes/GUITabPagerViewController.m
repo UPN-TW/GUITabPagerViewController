@@ -7,12 +7,11 @@
 //
 
 #import "GUITabPagerViewController.h"
-#import "GUITabScrollView.h"
 
 @interface GUITabPagerViewController () <GUITabScrollDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
-@property (strong, nonatomic) GUITabScrollView *header;
+
 @property (assign, nonatomic) NSInteger selectedIndex;
 
 @property (strong, nonatomic) NSMutableArray *viewControllers;
