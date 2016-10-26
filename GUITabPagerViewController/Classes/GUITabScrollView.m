@@ -18,14 +18,17 @@
 @property (strong, nonatomic) NSLayoutConstraint *tabIndicatorDisplacement;
 @property (strong, nonatomic) NSLayoutConstraint *tabIndicatorWidth;
 
+@property (nonatomic) CGFloat space;
+
 @end
 
 @implementation GUITabScrollView
 
 #pragma mark - Initialize Methods
 
-- (instancetype)initWithFrame:(CGRect)frame tabViews:(NSArray *)tabViews tabBarHeight:(CGFloat)height tabColor:(UIColor *)color backgroundColor:(UIColor *)backgroundColor selectedTabIndex:(NSInteger)index {
-    self = [self initWithFrame:frame tabViews:tabViews tabBarHeight:height tabColor:color backgroundColor:backgroundColor];
+- (instancetype)initWithFrame:(CGRect)frame tabViews:(NSArray *)tabViews tabBarHeight:(CGFloat)height tabColor:(UIColor *)color backgroundColor:(UIColor *)backgroundColor selectedTabIndex:(NSInteger)index space:(CGFloat)space
+{
+    self = [self initWithFrame:frame tabViews:tabViews tabBarHeight:height tabColor:color backgroundColor:backgroundColor space:space];
     if (self) {
         NSInteger tabIndex = 0;
         if (index) {
@@ -36,19 +39,35 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame tabViews:(NSArray *)tabViews tabBarHeight:(CGFloat)height tabColor:(UIColor *)color backgroundColor:(UIColor *)backgroundColor {
+
+- (instancetype)initWithFrame:(CGRect)frame tabViews:(NSArray *)tabViews tabBarHeight:(CGFloat)height tabColor:(UIColor *)color backgroundColor:(UIColor *)backgroundColor selectedTabIndex:(NSInteger)index
+{
+    self = [self initWithFrame:frame tabViews:tabViews tabBarHeight:height tabColor:color backgroundColor:backgroundColor selectedTabIndex:index space:10.0f];
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame tabViews:(NSArray *)tabViews tabBarHeight:(CGFloat)height tabColor:(UIColor *)color backgroundColor:(UIColor *)backgroundColor
+{
+    self = [self initWithFrame:frame tabViews:tabViews tabBarHeight:height tabColor:color backgroundColor:backgroundColor space:10.0];
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame tabViews:(NSArray *)tabViews tabBarHeight:(CGFloat)height tabColor:(UIColor *)color backgroundColor:(UIColor *)backgroundColor space:(CGFloat)space
+{
   self = [super initWithFrame:frame];
   
   if (self) {
+      self.space = space;
+
     [self setShowsHorizontalScrollIndicator:NO];
     [self setBounces:NO];
     
     [self setTabViews:tabViews];
     
-    CGFloat width = 10;
+    CGFloat width = space;
     
     for (UIView *view in tabViews) {
-      width += view.frame.size.width + 10;
+      width += view.frame.size.width + space;
     }
     
     [self setContentSize:CGSizeMake(MAX(width, self.frame.size.width), height)];
@@ -76,7 +95,7 @@
     for (UIView *tab in tabViews) {
       [contentView addSubview:tab];
       [tab setTranslatesAutoresizingMaskIntoConstraints:NO];
-      [VFL appendFormat:@"-%f-[T%d(%f)]", index ? 10.0f : 10.0 + widthDifference / 2, index, tab.frame.size.width];
+      [VFL appendFormat:@"-%f-[T%d(%f)]", index ? space : space + widthDifference / 2, index, tab.frame.size.width];
       [views setObject:tab forKey:[NSString stringWithFormat:@"T%d", index]];
       
       [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[T]-2-|"
@@ -90,7 +109,7 @@
       index++;
     }
     
-    [VFL appendString:[NSString stringWithFormat:@"-%f-|", 10.0f + widthDifference / 2]];
+    [VFL appendString:[NSString stringWithFormat:@"-%f-|", space + widthDifference / 2]];
     
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:VFL
                                                                         options:0
@@ -162,10 +181,10 @@
     CGFloat x = [[self tabViews][0] frame].origin.x - 5;
     
     for (int i = 0; i < index; i++) {
-        x += [[self tabViews][i] frame].size.width + 10;
+        x += [[self tabViews][i] frame].size.width + self.space;
     }
     
-    CGFloat w = [[self tabViews][index] frame].size.width + 10;
+    CGFloat w = [[self tabViews][index] frame].size.width + self.space;
     [UIView animateWithDuration:animatedDuration
                      animations:^{
                          CGFloat p = x - (self.frame.size.width - w) / 2;
