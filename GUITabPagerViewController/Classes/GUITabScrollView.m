@@ -178,7 +178,7 @@
         animatedDuration = 0.0f;
     }
     
-    CGFloat x = [[self tabViews][0] frame].origin.x - 5;
+    CGFloat x = [[self tabViews][0] frame].origin.x - 0.5 * self.space;
     
     for (int i = 0; i < index; i++) {
         x += [[self tabViews][i] frame].size.width + self.space;
