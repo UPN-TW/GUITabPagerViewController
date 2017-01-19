@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "GUITabScrollView.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol GUITabPagerDataSource;
 @protocol GUITabPagerDelegate;
 
@@ -51,3 +53,5 @@
 - (void)tabPager:(GUITabPagerViewController *)tabPager didTransitionToTabAtIndex:(NSInteger)index;
 
 @end
+
+NS_ASSUME_NONNULL_END

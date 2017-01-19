@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol GUITabScrollDelegate;
 
 @interface GUITabScrollView : UIScrollView
@@ -29,3 +31,5 @@
 - (void)tabScrollView:(GUITabScrollView *)tabScrollView didSelectTabAtIndex:(NSInteger)index;
 
 @end
+
+NS_ASSUME_NONNULL_END
