@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)selectTabbarIndex:(NSInteger)index;
 - (void)selectTabbarIndex:(NSInteger)index animation:(BOOL)animation;
+- (void)tabScrollView:(GUITabScrollView *)tabScrollView didSelectTabAtIndex:(NSInteger)index;
 
 @end
 
