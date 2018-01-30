@@ -66,7 +66,7 @@ There are two public methods:
 
 ```obj-c
 - (void)reloadData;
-- (NSInteger)selectedIndex;
+- (NSInteger)selectedIndex;aaa
 ```
 
 `reloadData` will refresh the content of the tab pager view controller. Make sure to provide the data source before reloading the content.
