@@ -148,11 +148,19 @@
 
     [[[self pageViewController] view] setFrame:frame];
 
-    [self.pageViewController setViewControllers:@[[self viewControllers][0]]
+    [self.pageViewController setViewControllers:@[[self viewControllers][self.presentingIndex]]
                                       direction:UIPageViewControllerNavigationDirectionReverse
                                        animated:NO
                                      completion:nil];
-    [self setSelectedIndex:0];
+    [self setSelectedIndex:self.presentingIndex];
+}
+
+- (NSInteger)presentingIndex
+{
+    if (!_presentingIndex) {
+        _presentingIndex = 0;
+    }
+    return _presentingIndex;
 }
 
 - (void)reloadTabs {
