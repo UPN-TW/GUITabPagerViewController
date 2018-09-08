@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) GUITabScrollView *header;
 
+@property (assign, nonatomic) NSInteger presentingIndex;
+
 - (void)reloadData;
 - (NSInteger)selectedIndex;
 
